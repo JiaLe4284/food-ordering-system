@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>3.0.5</version>
         <relativePath/>
     </parent>
 
@@ -16,8 +16,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>common</module>
         <module>order-service</module>
+        <module>common</module>
     </modules>
 
     <!-- serves as container for child modules, no runnable jar is created for pom packaging-->
@@ -57,7 +57,7 @@
             </dependency>
             <dependency>
                 <groupId>com.food.ordering.system</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>common-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
