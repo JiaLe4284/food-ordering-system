@@ -1,22 +1,33 @@
 package com.food.ordering.system.order.service.domain.entity;
 
 import com.food.ordering.system.domain.entity.AggregateRoot;
+import com.food.ordering.system.domain.exception.DomainException;
+import com.food.ordering.system.domain.valueobject.ProductId;
 import com.food.ordering.system.domain.valueobject.RestaurantId;
+import com.food.ordering.system.order.service.domain.exception.OrderDomainException;
 
 import java.util.List;
+import java.util.Map;
 
 public class Restaurant extends AggregateRoot<RestaurantId> {
-    private List<Product> products;
+    private Map<ProductId, Product> productMap;
     private boolean isActive;
 
     private Restaurant(Builder builder) {
         super.setId(builder.restaurantId);
-        products = builder.products;
+        productMap = builder.productMap;
         isActive = builder.isActive;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public void validate() {
+        if (!isActive()) {
+            throw new OrderDomainException("Restaurant with id " + getId().getValue() +
+                    " is currently not active!");
+        }
+    }
+
+    public Map<ProductId, Product> getProductMap() {
+        return productMap;
     }
 
     public boolean isActive() {
@@ -25,7 +36,7 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
 
     public static final class Builder {
         private RestaurantId restaurantId;
-        private List<Product> products;
+        private Map<ProductId, Product> productMap;
         private boolean isActive;
 
         private Builder() {
@@ -40,8 +51,8 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
             return this;
         }
 
-        public Builder products(List<Product> val) {
-            products = val;
+        public Builder products(Map<ProductId, Product> val) {
+            productMap = val;
             return this;
         }
 
