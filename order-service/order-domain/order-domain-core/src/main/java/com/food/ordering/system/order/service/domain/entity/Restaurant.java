@@ -1,12 +1,10 @@
 package com.food.ordering.system.order.service.domain.entity;
 
 import com.food.ordering.system.domain.entity.AggregateRoot;
-import com.food.ordering.system.domain.exception.DomainException;
 import com.food.ordering.system.domain.valueobject.ProductId;
 import com.food.ordering.system.domain.valueobject.RestaurantId;
 import com.food.ordering.system.order.service.domain.exception.OrderDomainException;
 
-import java.util.List;
 import java.util.Map;
 
 public class Restaurant extends AggregateRoot<RestaurantId> {
@@ -34,16 +32,16 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
         return isActive;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static final class Builder {
         private RestaurantId restaurantId;
         private Map<ProductId, Product> productMap;
         private boolean isActive;
 
         private Builder() {
-        }
-
-        public static Builder builder() {
-            return new Builder();
         }
 
         public Builder restaurantId(RestaurantId val) {
