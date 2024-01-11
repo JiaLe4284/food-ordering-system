@@ -7,6 +7,7 @@ import com.food.ordering.system.domain.valueobject.RestaurantId;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderCommand;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderResponse;
 import com.food.ordering.system.order.service.domain.dto.create.OrderAddress;
+import com.food.ordering.system.order.service.domain.dto.track.TrackOrderResponse;
 import com.food.ordering.system.order.service.domain.entity.Order;
 import com.food.ordering.system.order.service.domain.entity.OrderItem;
 import com.food.ordering.system.order.service.domain.entity.Product;
@@ -21,7 +22,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class OrderDataMapper {
-
     public Restaurant toRestaurantFrom(CreateOrderCommand createOrderCommand) {
         return Restaurant.builder()
                 .restaurantId(new RestaurantId((createOrderCommand.getRestaurantId())))
@@ -46,6 +46,15 @@ public class OrderDataMapper {
         return CreateOrderResponse.builder()
                 .orderTrackingId(orderCreatedEvent.getOrder().getTrackingId().getValue())
                 .orderStatus(orderCreatedEvent.getOrder().getOrderStatus())
+                .build();
+    }
+
+
+    public TrackOrderResponse toTrackOrderResponseFrom(Order order) {
+        return TrackOrderResponse.builder()
+                .orderTrackingId(order.getTrackingId().getValue())
+                .orderStatus(order.getOrderStatus())
+                .failureMessages(order.getFailureMessages())
                 .build();
     }
 
