@@ -5,11 +5,13 @@ import com.food.ordering.system.domain.valueobject.Money;
 import com.food.ordering.system.domain.valueobject.ProductId;
 import com.food.ordering.system.domain.valueobject.RestaurantId;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderCommand;
+import com.food.ordering.system.order.service.domain.dto.create.CreateOrderResponse;
 import com.food.ordering.system.order.service.domain.dto.create.OrderAddress;
-import com.food.ordering.system.order.service.domain.entity.OrderItem;
 import com.food.ordering.system.order.service.domain.entity.Order;
+import com.food.ordering.system.order.service.domain.entity.OrderItem;
 import com.food.ordering.system.order.service.domain.entity.Product;
 import com.food.ordering.system.order.service.domain.entity.Restaurant;
+import com.food.ordering.system.order.service.domain.event.OrderCreatedEvent;
 import com.food.ordering.system.order.service.domain.valueobject.StreetAddress;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +39,13 @@ public class OrderDataMapper {
                 .price(new Money(createOrderCommand.getPrice()))
                 .deliveryAddress(toStreetAddressFrom(createOrderCommand.getAddress()))
                 .items(toOrderItemEntitiesFrom(createOrderCommand.getItems()))
+                .build();
+    }
+
+    public CreateOrderResponse toCreateOrderResponseFrom(OrderCreatedEvent orderCreatedEvent) {
+        return CreateOrderResponse.builder()
+                .orderTrackingId(orderCreatedEvent.getOrder().getTrackingId().getValue())
+                .orderStatus(orderCreatedEvent.getOrder().getOrderStatus())
                 .build();
     }
 
