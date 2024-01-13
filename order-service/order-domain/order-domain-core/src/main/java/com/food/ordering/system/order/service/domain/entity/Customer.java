@@ -8,6 +8,10 @@ public class Customer extends AggregateRoot<CustomerId> {
     private String firstname;
     private String lastname;
 
+    public Customer(CustomerId customerId) {
+        super.setId(customerId);
+    }
+
     public Customer(String username, String firstname, String lastname) {
         this.username = username;
         this.firstname = firstname;

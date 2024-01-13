@@ -42,10 +42,11 @@ public class OrderDataMapper {
                 .build();
     }
 
-    public CreateOrderResponse toCreateOrderResponseFrom(OrderCreatedEvent orderCreatedEvent) {
+    public CreateOrderResponse toCreateOrderResponseFrom(OrderCreatedEvent orderCreatedEvent, String message) {
         return CreateOrderResponse.builder()
                 .orderTrackingId(orderCreatedEvent.getOrder().getTrackingId().getValue())
                 .orderStatus(orderCreatedEvent.getOrder().getOrderStatus())
+                .message(message)
                 .build();
     }
 
