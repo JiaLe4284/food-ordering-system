@@ -18,6 +18,7 @@
     <modules>
         <module>order-service</module>
         <module>common</module>
+        <module>infrastructure</module>
     </modules>
 
     <!-- serves as container for child modules, no runnable jar is created for pom packaging-->
