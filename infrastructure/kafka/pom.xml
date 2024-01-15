@@ -28,11 +28,14 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Spring Kafka -->
             <dependency>
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>
                 <version>${spring-kafka.version}</version>
             </dependency>
+
+            <!-- Kafka Avro Serializer -->
             <dependency>
                 <groupId>io.confluent</groupId>
                 <artifactId>kafka-avro-serializer</artifactId>
@@ -56,6 +59,8 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+            <!-- Apache Avro -->
             <dependency>
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro</artifactId>
