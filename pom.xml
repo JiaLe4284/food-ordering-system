@@ -19,7 +19,6 @@
         <module>order-service</module>
         <module>common</module>
         <module>infrastructure</module>
-        <module>common/common-application</module>
     </modules>
 
     <!-- serves as container for child modules, no runnable jar is created for pom packaging-->
@@ -69,6 +68,11 @@
             <dependency>
                 <groupId>com.food.ordering.system</groupId>
                 <artifactId>common-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>common-dataaccess</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
