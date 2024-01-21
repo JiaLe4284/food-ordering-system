@@ -96,6 +96,7 @@ public class OrderDataAccessMapper {
                 .street(deliveryAddress.getStreet())
                 .postalCode(deliveryAddress.getPostalCode())
                 .city(deliveryAddress.getCity())
+                .order(orderEntity)
                 .build();
 
         orderEntity.setAddress(addressEntity);
