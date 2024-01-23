@@ -38,6 +38,4 @@ public abstract class OrderApprovalEvent implements DomainEvent<OrderApproval> {
     public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
-
-    public abstract void fire();
 }
