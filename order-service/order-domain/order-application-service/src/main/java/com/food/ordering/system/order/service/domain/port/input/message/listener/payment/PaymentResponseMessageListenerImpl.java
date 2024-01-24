@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 @Validated
 @Service
-public class PaymentResponseMessageListenerImpl implements PaymentResponseMessageListener{
+public class PaymentResponseMessageListenerImpl implements PaymentResponseMessageListener {
     @Override
     public void paymentCompleted(PaymentResponse paymentResponse) {
 
