@@ -42,6 +42,7 @@ public class OrderCreateHelper {
         this.orderDataMapper = orderDataMapper;
         this.orderCreatedEventDomainEventPublisher = orderCreatedEventDomainEventPublisher;
     }
+
     @Transactional
     public OrderCreatedEvent persistOrder(CreateOrderCommand createOrderCommand) {
         checkCustomer(createOrderCommand.getCustomerId());

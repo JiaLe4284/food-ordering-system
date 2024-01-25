@@ -110,11 +110,11 @@ class OrderApplicationServiceTest {
                         .build())
                 .price(new BigDecimal("250.00"))
                 .items(List.of(OrderItem.builder()
-                                .productId(PRODUCT_ID)
-                                .quantity(4)
-                                .price(new BigDecimal("50.00"))
-                                .subtotal(new BigDecimal("200.00"))
-                                .build()))
+                        .productId(PRODUCT_ID)
+                        .quantity(4)
+                        .price(new BigDecimal("50.00"))
+                        .subtotal(new BigDecimal("200.00"))
+                        .build()))
                 .build();
 
         // when
