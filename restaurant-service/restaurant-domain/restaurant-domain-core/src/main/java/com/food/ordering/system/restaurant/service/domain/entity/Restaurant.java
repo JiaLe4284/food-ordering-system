@@ -21,12 +21,12 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
         }
 
         Money totalAmount = orderDetail.getProducts().stream().map(product -> {
-                if (!product.isAvailable()) {
-                    failureMessages.add("Product with id: " + product.getId().getValue()
-                            + " is not available");
-                }
-                return product.getPrice().multiply(product.getQuantity());
-            }).reduce(Money.ZERO, Money::add);
+            if (!product.isAvailable()) {
+                failureMessages.add("Product with id: " + product.getId().getValue()
+                        + " is not available");
+            }
+            return product.getPrice().multiply(product.getQuantity());
+        }).reduce(Money.ZERO, Money::add);
 
         if (!totalAmount.equals(orderDetail.getTotalAmount())) {
             failureMessages.add("Price total is not correct for order: " + orderDetail.getId());

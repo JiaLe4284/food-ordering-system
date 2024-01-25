@@ -30,7 +30,7 @@ public class PaymentRequestKafkaListener implements KafkaConsumer<PaymentRequest
 
     @Override
     @KafkaListener(id = "${kafka-consumer-config.payment-consumer-group-id}",
-                topics = "${payment-service.payment-request-topic-name}")
+            topics = "${payment-service.payment-request-topic-name}")
     public void receive(@Payload List<PaymentRequestAvroModel> message,
                         @Header(KafkaHeaders.KEY) List<String> keys,
                         @Header(KafkaHeaders.PARTITION) List<Integer> partitions,
@@ -46,7 +46,7 @@ public class PaymentRequestKafkaListener implements KafkaConsumer<PaymentRequest
                 log.info("Processing payment for order id: {}", paymentRequestAvroModel.getOrderId());
                 paymentRequestMessageListener.completePayment(paymentMessagingDataMapper
                         .toPaymentRequest(paymentRequestAvroModel));
-            } else if(PaymentOrderStatus.CANCELLED == paymentRequestAvroModel.getPaymentOrderStatus()) {
+            } else if (PaymentOrderStatus.CANCELLED == paymentRequestAvroModel.getPaymentOrderStatus()) {
                 log.info("Cancelling payment for order id: {}", paymentRequestAvroModel.getOrderId());
                 paymentRequestMessageListener.cancelPayment(paymentMessagingDataMapper
                         .toPaymentRequest(paymentRequestAvroModel));

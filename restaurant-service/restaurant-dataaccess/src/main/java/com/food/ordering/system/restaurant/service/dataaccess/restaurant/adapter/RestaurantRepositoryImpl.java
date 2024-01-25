@@ -19,6 +19,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
         this.restaurantJpaRepository = restaurantJpaRepository;
         this.restaurantDataAccessMapper = restaurantDataAccessMapper;
     }
+
     @Override
     public Optional<Restaurant> findRestaurantInformation(Restaurant restaurant) {
         List<UUID> restaurantProducts =

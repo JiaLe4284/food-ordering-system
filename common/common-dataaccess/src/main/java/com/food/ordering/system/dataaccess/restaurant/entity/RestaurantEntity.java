@@ -6,7 +6,6 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 import lombok.*;
 
-
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
