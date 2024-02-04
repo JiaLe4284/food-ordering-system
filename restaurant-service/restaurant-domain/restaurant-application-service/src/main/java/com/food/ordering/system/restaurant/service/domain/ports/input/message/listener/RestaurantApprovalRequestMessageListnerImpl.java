@@ -19,6 +19,5 @@ public class RestaurantApprovalRequestMessageListnerImpl implements RestaurantAp
     public void approveOrder(RestaurantApprovalRequest restaurantApprovalRequest) {
         OrderApprovalEvent orderApprovalEvent =
                 restaurantApprovalRequestHelper.persistOrderApproval(restaurantApprovalRequest);
-        orderApprovalEvent.fire();
     }
 }
