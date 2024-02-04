@@ -1,5 +1,8 @@
 package com.food.ordering.system.kafka.producer;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.food.ordering.system.outbox.OutboxStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.support.SendResult;
@@ -11,9 +14,26 @@ import java.util.function.BiConsumer;
 @Component
 public class KafkaMessageHelper {
 
-    public <T> BiConsumer<SendResult<String, T>, Throwable> getKafkaCallback(String responseTopicName,
-                                                                             T avroModel, String orderId,
-                                                                             String avroModelName) {
+    private final ObjectMapper objectMapper;
+
+    public KafkaMessageHelper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+    public <T> T getOrderEventPayload(String payload, Class<T> outputType) {
+        try {
+            return objectMapper.readValue(payload, outputType);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public <T, U> BiConsumer<SendResult<String, T>, Throwable> getKafkaCallback(String responseTopicName,
+                                                                                T avroModel,
+                                                                                U outboxMessage,
+                                                                                BiConsumer<U, OutboxStatus> outboxCallback,
+                                                                                String orderId,
+                                                                                String avroModelName) {
         return (result, ex) -> {
             if (ex == null) {
                 RecordMetadata metadata = result.getRecordMetadata();
@@ -24,9 +44,11 @@ public class KafkaMessageHelper {
                         metadata.partition(),
                         metadata.offset(),
                         metadata.timestamp());
+                outboxCallback.accept(outboxMessage, OutboxStatus.COMPLETED);
             } else {
                 log.error("Error while sending " + avroModelName +
                         " message {} to topic {}", avroModel.toString(), responseTopicName, ex);
+                outboxCallback.accept(outboxMessage, OutboxStatus.FAILED);
             }
         };
     }

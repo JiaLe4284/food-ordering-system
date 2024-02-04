@@ -16,9 +16,4 @@ public class PaymentCancelledEvent extends PaymentEvent {
         super(payment, createdAt, Collections.emptyList());
         this.paymentCancelledEventDomainEventPublisher = paymentCancelledEventDomainEventPublisher;
     }
-
-    @Override
-    public void fire() {
-        paymentCancelledEventDomainEventPublisher.publish(this);
-    }
 }
