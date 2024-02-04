@@ -127,7 +127,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse> {
 
     private OrderPaidEvent completePaymentForOrder(PaymentResponse paymentResponse) {
         log.info("Completing payment for order with id: {}", paymentResponse.getOrderId());
-        Order order = findOrder(paymentResponse.getOrderId());
+        Order order = this.findOrder(paymentResponse.getOrderId());
         OrderPaidEvent domainEvent = orderDomainService.payOrder(order);
         orderRepository.save(order);
         return domainEvent;
@@ -135,7 +135,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse> {
 
     private Order rollbackPaymentForOrder(PaymentResponse paymentResponse) {
         log.info("Cancelling order with id: {}", paymentResponse.getOrderId());
-        Order order = findOrder(paymentResponse.getOrderId());
+        Order order = this.findOrder(paymentResponse.getOrderId());
         orderDomainService.cancelOrder(order, paymentResponse.getFailureMessages());
         orderRepository.save(order);
         return order;
