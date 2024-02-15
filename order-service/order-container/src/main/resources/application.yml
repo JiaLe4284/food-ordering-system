@@ -15,7 +15,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/food_order_db?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver

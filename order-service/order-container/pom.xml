@@ -57,6 +57,9 @@
                 <configuration>
                     <image>
                         <name>${project.groupId}/order.service:${project.version}</name>
+                        <env>
+                            <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+                        </env>
                     </image>
                 </configuration>
                 <executions>
