@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "ba038de4-1352-411f-b84f-403c9141a2a0",
+		"name": "Food-Ordering-System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18217266"
+	},
+	"item": [
+		{
+			"name": "Create-Orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"customerId\": \"c3e090a4-cd93-487d-815f-5edd85a8d457\",\n  \"restaurantId\": \"d215b5f8-0249-4dc5-89a3-51fd148cfb45\",\n  \"address\": {\n    \"street\": \"street_1\",\n    \"postalCode\": \"1000AB\",\n    \"city\": \"Amsterdam\"\n  },\n  \"price\": 100.00,\n  \"items\": [\n    {\n      \"productId\": \"d215b5f8-0249-4dc5-89a3-51fd148cfb48\",\n      \"quantity\": 2,\n      \"price\": 50.00,\n      \"subtotal\": 100.00\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8181/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create-Orders-With-Not-Available-Products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"customerId\": \"c3e090a4-cd93-487d-815f-5edd85a8d457\",\n  \"restaurantId\": \"d215b5f8-0249-4dc5-89a3-51fd148cfb45\",\n  \"address\": {\n    \"street\": \"street_1\",\n    \"postalCode\": \"1000AB\",\n    \"city\": \"Amsterdam\"\n  },\n  \"price\": 25.00,\n  \"items\": [\n    {\n      \"productId\": \"d215b5f8-0249-4dc5-89a3-51fd148cfb47\",\n      \"quantity\": 1,\n      \"price\": 25.00,\n      \"subtotal\": 25.00\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8181/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order-Tracking",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8181/orders/7d9aab3b-3be0-4793-8bd2-80445a2df26e",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"orders",
+						"7d9aab3b-3be0-4793-8bd2-80445a2df26e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Customers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"{{$guid}}\",\n    \"username\": \"TEST_USER_1\",\n    \"firstName\": \"TEST_FIRST_NAME\",\n    \"lastName\": \"TEST_LAST_NAME\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8184/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8184",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
